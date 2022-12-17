@@ -11,6 +11,10 @@ defmodule ToyRobot.AgentRobot do
 
   def right, do: Agent.update(__MODULE__, &(ToyRobot.right(&1)))
 
+  def move_back, do: Agent.update(__MODULE__, &(ToyRobot.move_back(&1)))
+
+  def u_turn, do: Agent.update(__MODULE__, &(ToyRobot.u_turn(&1)))
+
   def report do
     Agent.get(__MODULE__, &(&1)) |> ToyRobot.report
   end
