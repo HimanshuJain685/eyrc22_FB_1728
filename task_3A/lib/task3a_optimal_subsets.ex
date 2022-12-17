@@ -31,6 +31,7 @@ defmodule Task3aOptimalSubsets do
   def valid_sum(matrix_of_sum \\ random_matrix_generator()) do
     IO.inspect matrix_of_sum, label:  "matrix_of_sum"
     ### Write your code here ###
+    matrix_of_sum |> List.flatten |> Enum.filter( fn x -> is_integer(x) end )
 
   end
 
@@ -51,6 +52,11 @@ defmodule Task3aOptimalSubsets do
     IO.inspect array_of_digits, label:  "array_of_digits"
     IO.inspect sum_val, label:  "sum_val"
     ### Write your code here ###
+    if sum_val>0 do
+      list1 = Combination.combine(array_of_digits)
+      Enum.filter( list1, &( if Enum.sum(&1)==sum_val, do: &1 ))
+    else
+      []
 
   end
 
@@ -69,6 +75,8 @@ defmodule Task3aOptimalSubsets do
     IO.inspect array_of_digits, label:  "array_of_digits"
     IO.inspect matrix_of_sum, label:  "matrix_of_sum"
     ### Write your code here ###
+    list1 = valid_sum(matrix_of_sum)
+    Map.new(list1,fn x ->{x, sum_of_one(array_of_digits,x)} end)
 
   end
 
