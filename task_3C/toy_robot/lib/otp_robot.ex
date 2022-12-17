@@ -11,6 +11,8 @@ defmodule ToyRobot.OtpRobot do
   def move, do: GenServer.cast(__MODULE__, :move)
   def left, do: GenServer.cast(__MODULE__, :left)
   def right, do: GenServer.cast(__MODULE__, :right)
+  def move_back, do: GenServer.cast(__MODULE__, :move_back)
+  def u_turn, do: GenServer.cast(__MODULE__, :u_turn)
 
   def trigger_failure do
     GenServer.cast(__MODULE__, :failure)
@@ -47,6 +49,14 @@ defmodule ToyRobot.OtpRobot do
 
   def handle_cast(:right, current_state) do
     {:noreply, ToyRobot.right(current_state)}
+  end
+
+  def handle_cast(:move_back, current_state) do
+    {:noreply, ToyRobot.move_back(current_state)}
+  end
+
+  def handle_cast(:u_turn, current_state) do
+    {:noreply, ToyRobot.u_turn(current_state)}
   end
 
   def handle_cast(:failure, _current_state) do
