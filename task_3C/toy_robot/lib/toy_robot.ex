@@ -109,4 +109,28 @@ defmodule ToyRobot do
   def failure do
     raise "Connection has been lost"
   end
+
+  def move_back(%ToyRobot.Position{x: _, y: y, facing: :north} = robot) when y > 0 do
+    %ToyRobot.Position{robot | y: y - 1}
+  end
+
+  def move_back(%ToyRobot.Position{x: x, y: _, facing: :east} = robot) when x > 0 do
+    %ToyRobot.Position{robot | x: x - 1}
+  end
+
+  def move_back(%ToyRobot.Position{x: _, y: y, facing: :south} = robot) when y < @table_top_y do
+    %ToyRobot.Position{robot | y: y + 1}
+  end
+
+  def move_back(%ToyRobot.Position{x: x, y: _, facing: :west} = robot) when x < @table_top_x do
+    %ToyRobot.Position{robot | x: x + 1}
+  end
+
+  def move_back(robot), do: robot
+
+  @directions_to_u_turn %{north: :south, east: :west, south: :north, west: :east}
+  def u_turn(%ToyRobot.Position{facing: facing} = robot) do
+    %ToyRobot.Position{robot | facing: @directions_to_u_turn[facing]}
+  end
+
 end
