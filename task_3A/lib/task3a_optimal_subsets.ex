@@ -101,3 +101,17 @@ defmodule Task3aOptimalSubsets do
   end
 
 end
+
+defmodule Combination do
+
+      def combine([]) do
+             []
+      end
+
+      def combine([head | tail]) do
+             tail_combinations = combine(tail)
+             merged_combinations = Enum.map([[]] ++ tail_combinations,fn c -> c ++ [head] end)
+             tail_combinations ++ merged_combinations
+      end
+
+end
